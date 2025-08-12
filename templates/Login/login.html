@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    {% load static %}
+    <style>
+        /* Apply a full-page background image */
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'images/Login/login_bg.webp' %}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Card styling */
+        .login-card {
+            background-color: rgba(0, 0, 0, 0.7); /* Black with 0.7 opacity */
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 35%;
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+            /* Title styling */
+            .login-card h2 {
+                color: #ffcc00; /* Different color for the title */
+                font-size: 28px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            /* Paragraph text */
+            .login-card p {
+                margin: 0 50px;
+                margin-bottom: 30px;
+                color: #ddd;
+                font-size: 14px;
+                text-align: center;
+                line-height:1.2rem;
+            }
+
+            /* Form styling */
+            .login-card form {
+                width: 100%;
+            }
+
+            .login-card input {
+                width: 90%;
+                height: 40px;
+                padding: 10px;
+                margin: auto 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+                background-color: rgba(0, 0, 0, 0.7);
+                color: white;
+            }
+
+        /* Button container styling */
+        .button-container {
+            width: 100%;
+            text-align: center;
+        }
+
+        .login-card button {
+            width: 40%;
+            padding: 10px;
+            background-color: #007bff;
+            margin: 20px auto; /* Centers the button horizontally */
+            border: none;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .login-card button:hover {
+                background-color: #0056b3;
+            }
+
+        /* Styling for the sign-up link */
+        .signup {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #bbb; /* Lighter text for contrast */
+        }
+
+            .signup a {
+                text-decoration: none;
+                color: #007bff;
+                font-weight: bold;
+            }
+
+                .signup a:hover {
+                    text-decoration: underline;
+                }
+
+        /* Responsive Design */
+        @media (max-width: 860px) {
+            .login-card {
+                width: 70%; /* Increase the width on smaller screens */
+            }
+
+                .login-card h2 {
+                    font-size: 24px; /* Decrease title font size */
+                }
+
+                .login-card p {
+                    font-size: 14px; /* Decrease paragraph font size */
+                    margin: 0 40px; /* Reduce margin for better fitting */
+                    margin-bottom:30px;
+                }
+
+                .login-card input {
+                    width: 80%; /* Reduce width of inputs */
+                    height: 35px; /* Reduce input height */
+                }
+
+                .login-card button {
+                    width: 60%; /* Increase button width */
+                    padding: 12px; /* Add more padding to make it touch-friendly */
+                }
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                width: 80%; /* Make the card width almost full screen on very small screens */
+                height:40%;
+            }
+
+                .login-card h2 {
+                    font-size: 20px; /* Further reduce title font size */
+                }
+
+                .login-card p {
+                    font-size: 12px; /* Further decrease paragraph font size */
+                    margin: 0 15px; /* Reduce margin more */
+                    margin-bottom:20px;
+                }
+
+                .login-card input {
+                    width: 90%; /* Make inputs take more width */
+                    height: 35px; /* Adjust input height */
+                }
+
+                .login-card button {
+                    width: 80%; /* Button takes more width */
+                    padding: 12px; /* More padding for easy clicking */
+                }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2>Login</h2>
+        <p>Your trusted partner in 24/7 roadside assistance, ensuring safety and reliability whenever you're on the road.</p>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="email_id" placeholder='User ID'     required>
+            <input type="password" name="password"  placeholder="Password" required>
+            <div style="color: orange;">{{error_message}}</div>
+            <div class="button-container">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        <div class="signup">
+            Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
+        </div>
+        <div class="signup">
+            Are you a vendor? <a href="{% url 'vendorsignup' %}">Vendor Sign up</a>
+        </div>
+    </div>
+</body>
+</html>

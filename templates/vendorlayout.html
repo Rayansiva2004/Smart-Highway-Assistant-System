@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Consulting Finance Corporate Business - Consulting HTML Template" />
+    <meta name="keywords"
+          content="consulting, accountant, advisor, audit, beaver builder, broker, business, clean, company, consulting, corporate, finance, financial, insurance, trader" />
+    <meta name="author" content="Themexriver" />
+    <title>Finano Consulting HTML Template | Portfolio Single</title>
+    <!-- Stylesheets -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon" />
+
+    <!-- Responsive -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="{% static 'js/respond.js' %}"></script>
+    <![endif]-->
+</head>
+
+
+<body>
+    <div class="page-wrapper">
+        <!-- Preloader -->
+        <div class="preloader"></div>
+
+        <!-- Main Header-->
+        <header class="main-header header-style-five five-alternate">
+            <!--Header Top-->
+            <!-- End Header Top -->
+            <!--Header-Upper-->
+            <div class="header-upper">
+                <div class="auto-container">
+                    <div class="clearfix">
+                        <div class="pull-left logo-box">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="images/logo.png" alt="" title="" />
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="nav-outer clearfix">
+                            <!-- Main Menu -->
+                            <nav class="main-menu navbar-expand-md">
+                                <div class="navbar-header">
+                                    <button class="navbar-toggler"
+                                            type="button"
+                                            data-toggle="collapse"
+                                            data-target="#navbarSupportedContent"
+                                            aria-controls="navbarSupportedContent"
+                                            aria-expanded="false"
+                                            aria-label="Toggle navigation">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+
+                                <div class="navbar-collapse collapse clearfix"
+                                     id="navbarSupportedContent">
+                                    <ul class="navigation clearfix">
+                                        <li>
+                                            <a href="{% url 'bookings' %}">Bookings</a>
+    
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'history' %}">History</a>
+    
+                                        </li>
+
+                                       
+
+                                        <li><a href="{% url 'login' %}" style="width:100px;height:auto;padding:7px;background-color:orange;margin-top:10px;border-radius:5px;">Logout</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+
+                            <!--Outer Box-->
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Header Upper-->
+            <!--Sticky Header-->
+            <div class="sticky-header">
+                <div class="auto-container clearfix">
+                    <!--Logo-->
+                    <div class="logo pull-left">
+                        <a href="index.html" class="img-responsive">
+                            <img src="images/logo-small.png" alt="" title="" />
+                        </a>
+                    </div>
+
+                    <!--Right Col-->
+                    <div class="right-col pull-right">
+                        <!-- Main Menu -->
+                        <nav class="main-menu navbar-expand-md">
+                            <button class="navbar-toggler"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#navbarSupportedContent1"
+                                    aria-controls="navbarSupportedContent1"
+                                    aria-expanded="false"
+                                    aria-label="Toggle navigation">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                            <div class="navbar-collapse collapse clearfix"
+                                 id="navbarSupportedContent1">
+                                <ul class="navigation clearfix">
+                                    <li>
+                                        <a href="{% url 'bookings' %}">Bookings</a>
+
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'history' %}">History</a>
+
+                                    </li>
+
+                                    
+
+
+                                    
+                                    
+                                </ul>
+                            </div>
+                        </nav>
+                        <!-- Main Menu End-->
+                    </div>
+                </div>
+            </div>
+            <!--End Sticky Header-->
+        </header>
+        {% block content %}
+        {% endblock %}
+        <!--Main Footer-->
+        
+        
+    </div>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/isotope.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'js/jquery.fancybox.js' %}"></script>
+    <script src="{% static 'js/appear.js' %}"></script>
+    <script src="{% static 'js/owl.js' %}"></script>
+    <script src="{% static 'js/wow.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+
+</html>

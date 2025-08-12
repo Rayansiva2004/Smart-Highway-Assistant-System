@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Login",
+    "\\Roadside_Assistant",
+    "\\static",
+    "\\static\\css",
+    "\\templates",
+    "\\templates\\DocumentWallet",
+    "\\templates\\Login",
+    "\\UserSide",
+    "\\VendorSide"
+  ],
+  "SelectedNode": "\\Login\\urls.py",
+  "PreviewInSolutionExplorer": false
+}

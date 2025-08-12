@@ -1,0 +1,249 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load static %}
+<!--End Main Header -->
+<!-- Portfolio Single Section -->
+<!-- Portfolio Single Section -->
+
+<section class="portfolio-single-section">
+    <div class="portfolio-container">
+        <!-- Side-bar container -->
+        <!-- Right-side div container -->
+        <div class="right-side-container">
+            <div class="document-whole-header" style="
+                background-color: #f0f0f0;
+                width: 90%;
+                margin-left:auto;
+                margin-right:auto;
+                height: 270px;
+                border-radius: 20px;
+                background-color: rgb(68, 68, 254);
+                padding: 20px;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.527);
+                display: flex;
+                justify-content: space-between;
+              ">
+                <!-- You can add any content inside this div container -->
+                <div class="document-content">
+                    <div class="document-header">
+                        <h4 style="
+                      color: white;
+                      font-size: 34px;
+                      font-weight: 500;
+                      font-family: Verdana, Geneva, Tahoma, sans-serif;
+                      margin-top: 25px;
+                      white-space: nowrap;
+                    ">
+                            Digital Wallet for<br />
+                            Important Documents!
+                        </h4>
+                    </div>
+                    <div class="document-images" style="display: flex">
+
+
+                        <div class="create-document">
+                            <button class="create-document-btn" style="
+                        width: 200px;
+                        height: 49px;
+                        margin-left: 15px;
+                        border-radius: 10px;
+                        color: black;
+                        background-color: white;
+                        cursor: pointer;
+                        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.147);
+                        margin-top: 20px;
+                      ">
+                                Add document
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="document-wallet-image">
+                    <img src="{% static 'images/resource/document-wallet.png' %}" alt="document png" style="width: 320px; margin-top: -50px" />
+                </div>
+            </div>
+            <div class="Recent-documents-header">
+                <h6 style="
+                  font-size: 22px;
+                  margin-top: 40px;
+                  margin-left:100px;
+                  color: black;
+                  font-weight: bold;
+                ">
+                    Recent Documents
+                </h6>
+            </div>
+            <div class="Recent-documents-body" style="
+                width: 100%;
+                height: 600px;
+                background-color: rgb(253, 253, 253);
+                display: flex;
+                flex-direction: column;
+              ">
+                <div class="Recent-documents-row-1" style="
+                  display: flex;
+                  justify-content: space-around;
+                  margin-top: 20px;
+                ">
+                    {% for doc in documents %}
+                    <div class="recent-documents-1">
+                        <div class="recent-documents">
+                            <!-- Link to open the document in the modal -->
+                            <a href="{% url 'open_document' doc.id %}">
+                                <!-- Display document preview image -->
+                                <img src="{% static 'images/document_icon.png' %}" alt="{{ doc.title }}" style="border-radius: 10px;"/>
+                            </a>
+                        </div>
+                        <div class="document-name">
+                            <!-- Link to open the document in the modal when the title is clicked -->
+                            <a href="{% url 'open_document' doc.id %}" style="color:white;">
+                                <h6>{{ doc.title }}</h6>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function showMoreProjects() {
+        // Select all hidden project items and make them visible
+        document.querySelectorAll(".hidden-project").forEach(function (item) {
+            item.style.display = "block";
+        });
+        // Hide the "See All" link after expanding
+        document.querySelector(".see_more").style.display = "none";
+    }
+</script>
+
+<!-- End Portfolio Single Section -->
+
+<div id="addDocumentModal" class="modal">
+    <div class="modal-content">
+        <span class="close" style="margin-left: auto;">&times;</span>
+        <h2>Add Document</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-field">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" placeholder="Enter document title" required>
+            </div>
+            <div class="form-field">
+                <label for="document">Upload Document</label>
+                <input type="file" id="document" name="document" required>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+    </div>
+</div>
+
+<style>
+    /* Modal Styles */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        border-radius: 10px;
+        width: 50%;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .form-field {
+        margin-bottom: 15px;
+    }
+
+        .form-field label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-field input[type="text"],
+        .form-field input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+    .submit-btn {
+        background-color: #2e2d2d;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .submit-btn:hover {
+            background-color: #444;
+        }
+</style>
+
+<script>
+    // Get the modal
+    const modal = document.getElementById("addDocumentModal");
+
+    // Get the button that opens the modal
+    const btn = document.querySelector(".create-document-btn");
+
+    // Get the <span> element that closes the modal
+    const closeBtn = document.querySelector(".close");
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    closeBtn.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+</script>
+<!--End pagewrapper-->
+    {% endblock %}

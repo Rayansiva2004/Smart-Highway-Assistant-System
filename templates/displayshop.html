@@ -1,0 +1,218 @@
+﻿{% extends 'layout.html' %}
+{% block content %}
+<div class="header-container" style="display: flex; justify-content: space-between; align-items: center; margin-right: 30px;color:black;">
+    <h2 class="heading" style="margin-left: 30px;color:black;">{{ service_type }} Service Providers</h2>
+    <form method="get" action="" id="cityFilterForm">
+        <select id="cityDropdown" name="city" class="city-dropdown" onchange="document.getElementById('cityFilterForm').submit()">
+            <option value="all" {% if request.GET.city == 'all' %}selected{% endif %}>All Cities</option>
+            {% for city in cities %}
+                <option value="{{ city }}" {% if request.GET.city == city %}selected{% endif %}>{{ city }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+<div class="document-container">
+    {% for shop in shops %}
+    <div class="document-row" data-city="{{ shop.attribute1 }}">
+        <div class="row-data">{{ forloop.counter }}.</div>
+        <div class="row-data">{{ shop.first_name }}</div>
+        <div class="row-data">
+            <span class="info-icon" onclick="showInfo('{{ shop.first_name }}', '{{ shop.description }}')">ℹ️</span>
+            <button class="book-service-button" onclick="openModal('{{ shop.user_id }}')">Book Service</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<!-- Modal -->
+<div id="serviceModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 class="modal-heading">Book a Service</h2>
+        <form id="serviceForm" method="post" style="width: 100%;">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="vehicleModel" name="vehicle_model" placeholder="Enter Vehicle Model" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="vehicleNumber" name="vehicle_number" placeholder="Enter Vehicle Number" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="location" name="location" placeholder="Enter Location" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="problem" name="problem" placeholder="Enter Problem" required>
+            </div>
+
+            <input type="hidden" id="shopId" name="shop_id">
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .info-icon {
+        font-size: 16px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .info-icon:hover {
+        color: #007bff;
+    }
+
+    .book-service-button {
+        padding: 5px 15px;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .book-service-button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Modal styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background-color: black;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .close {
+        color: white;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: red;
+    }
+
+    .form-group {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .form-group input {
+        width: 90%;
+        height: 40px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        text-align: left;
+    }
+
+    .submit-button {
+        width: 90%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .submit-button:hover {
+        background-color: #0056b3;
+    }
+
+    .document-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+    }
+
+    .city-dropdown {
+        padding: 5px 15px;
+        background-color: white;
+        color: black;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    // Show shop information on icon click
+    function showInfo(shopName, description) {
+        alert(`Shop: ${shopName}\nDescription: ${description}`);
+    }
+
+    // Open the booking modal with the shop ID set
+    function openModal(shopId) {
+        document.getElementById('serviceModal').style.display = 'flex';
+        document.getElementById('shopId').value = shopId; // Set shop ID in the hidden input
+    }
+
+    // Close the modal and reset the form
+    function closeModal() {
+        document.getElementById('serviceModal').style.display = 'none';
+        document.getElementById('serviceForm').reset(); // Reset form when modal closes
+    }
+
+    // Close modal on outside click
+    window.onclick = function (event) {
+        const modal = document.getElementById('serviceModal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+
+    // Filter service providers based on selected city
+    function filterByCity() {
+        const selectedCity = document.getElementById('cityDropdown').value.toLowerCase();
+        const shopRows = document.querySelectorAll('.document-row');
+
+        shopRows.forEach(row => {
+            const shopCity = row.getAttribute('data-city').toLowerCase();
+            if (selectedCity === '' || shopCity === selectedCity) {
+                row.style.display = 'flex'; // Show row
+            } else {
+                row.style.display = 'none'; // Hide row
+            }
+        });
+    }
+</script>
+{% endblock %}

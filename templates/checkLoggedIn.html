@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Logged In</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if 'user_id' exists in localStorage
+            if (!localStorage.getItem('user_id')) {
+                // If not, assign the value passed from Django
+                const userId = "{{ user_id|escapejs }}"; // Escape JS special characters
+                localStorage.setItem('user_id', userId);
+                console.log(`Assigned user_id: ${userId}`);
+                window.location.href = "{% url 'document_wallet' %}";
+            } 
+
+            // Redirect to the document_wallet page
+             // Use Django's URL resolver
+        });
+    </script>
+</head>
+<body>
+    <h1>Redirecting...</h1>
+</body>
+</html>

@@ -1,0 +1,103 @@
+{% extends 'vendorlayout.html' %}
+{% block content %}
+
+<div class="container">
+    <h2 class="heading">Bookings requested</h2>
+    <table class="service-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Vehicle Name</th>
+                <th>Vehicle Number</th>
+                <th>Problem</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in service_entries %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ entry.name }}</td>
+                <td>{{ entry.phone_number }}</td>
+                <td>{{ entry.email }}</td>
+                <td>{{ entry.vehicle_model }}</td>
+                <td>{{ entry.vehicle_number }}</td>
+                <td>{{ entry.problem_description }}</td>
+                <td>{{ entry.location }}</td>
+                <td>
+                    <button class="generate-bill-button" onclick="generateBill('{{ entry.id }}')">Generate Bill</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .container {
+        padding: 20px;
+        background-color: #f4f4f4;
+        border-radius: 10px;
+    }
+
+    .heading {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .service-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+    }
+
+    .service-table th,
+    .service-table td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+    }
+
+    .service-table th {
+        background-color: #007bff;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .service-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .generate-bill-button {
+        padding: 8px 12px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .generate-bill-button:hover {
+        background-color: #218838;
+    }
+</style>
+
+<script>
+ function generateBill(entryId) {
+        // Get the base URL from Django template and replace the placeholder
+        let url = `{% url 'generate_bill' 12345 %}`.replace("12345", entryId);
+        window.location.href = url;
+    }
+
+
+</script>
+
+{% endblock %}
